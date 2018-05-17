@@ -1,0 +1,28 @@
+#update firewall entries SSH HTTP(S) METEOR (Direct)
+sudo firewall-cmd --permanent --add-service=ssh
+sudo firewall-cmd --zone=public --permanent --add-service=http
+sudo firewall-cmd --zone=public --permanent --add-service=https
+sudo firewall-cmd --permanent --zone=public --add-port=3000/tcp
+sudo firewall-cmd --list-all
+sudo firewall-cmd --list-all-zones
+systemctl restart firewalld
+
+#add React
+meteor npm install --save react react-dom
+meteor add react-meteor-data
+
+meteor mongo
+db.tasks.insert({ text: "Hello world!", createdAt: new Date() });
+db.tasks.insert({ text: "Hello world2!", createdAt: new Date() });
+
+meteor add accounts-ui accounts-password
+meteor npm install --save bcrypt
+
+meteor remove insecure
+meteor remove autopublish
+meteor npm install --save classnames
+
+meteor add meteortesting:mocha
+meteor npm install --save-dev chai
+meteor npm i --save-dev phantomjs-prebuilt
+#TEST_BROWSER_DRIVER=phantomjs meteor test --once --driver-package meteortesting:mocha
